@@ -44,6 +44,33 @@ void show_binary(int val) {
     printf("\n");
 }
 
+// Problem 2.10
+void inplace_swap(int *x, int *y) {
+    *y = *x ^ *y; // Step 1: x = x; y = x ^ y
+    *x = *x ^ *y; // Step 2: x = x ^ x ^ y; y = x ^ y
+    *y = *x ^ *y; // Step 3: x = x ^ x ^ y -> y; y = x ^ x ^ y ^ x ^ y -> x
+}
+
+/* Problem 2.11
+
+a. In final iteration of array, first and last both reference middle element of odd-length array
+b. inplace_swap sets middle element to 0 because xor-ing an element with itself is 0, so y becomes 0 on the first step
+   and x becomes y on the last step
+c. If we set the break condition to first < last instead of first <= last, this will work for all arrays
+*/
+void reverse_array(int a[], int cnt) {
+    for (int first = 0, last = cnt - 1; first < last; first++, last--) {
+        inplace_swap(&a[first], &a[last]);
+    }
+}
+
+void print_array(int a[], int cnt) {
+    for (int i = 0; i < cnt; ++i) {
+        printf(" %x ", a[i]);
+    }
+    printf("\n");
+}
+
 void main() {
     /* Problem 2.5
 
@@ -88,6 +115,13 @@ void main() {
     const char *m = "mnopqr";
     const m_length = 7;
     show_bytes((byte_pointer) m, m_length);
+
+
+    // Problem 2.11 Cont.
+    int nums[5] = { 1, 2, 3, 4, 5 };
+    print_array(nums, 5);
+    reverse_array(nums, 5);
+    print_array(nums, 5);
 }
 
 
