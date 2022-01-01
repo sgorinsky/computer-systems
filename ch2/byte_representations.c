@@ -29,7 +29,7 @@ void test_show_bytes(int val) {
 
 void show_binary(int val) {
     int ival = val;
-    const int int_length = sizeof(int) * 8;
+    const int int_length = sizeof(int) * 8; // sizeof yields answer in bytes
     int bits[int_length] = { 0 };
     int idx = int_length - 1;
     while (ival > 0) {
@@ -44,7 +44,6 @@ void show_binary(int val) {
 }
 
 int main() {
-    test_show_bytes(0x12345678);
     /* Problem 2.5
 
     int a = 0x12345678;
@@ -58,6 +57,7 @@ int main() {
     B: 78 56; 12 34
     C: 78 56 34; 12 34 56
     */
+    test_show_bytes(0x12345678);
 
     /* Problem 2.6 
 
