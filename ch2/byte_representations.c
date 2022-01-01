@@ -1,4 +1,5 @@
 #include <stdio.h>
+
 typedef unsigned char* byte_pointer; // creates a new type that is a pointer to a variable
 
 void show_bytes(byte_pointer start, size_t len) { // pointer to array of start bytes
@@ -43,7 +44,7 @@ void show_binary(int val) {
     printf("\n");
 }
 
-int main() {
+void main() {
     /* Problem 2.5
 
     int a = 0x12345678;
@@ -72,7 +73,21 @@ int main() {
     */
 
     show_binary(0x4A1F23E0);
-    return 0;
+
+    /* Problem 2.7
+
+    Result of:
+    const char *m = "mnopqr";
+    show_bytes((byte_pointer)m, strlen(m));
+
+    strings are more platform independent:
+    --> 6d 6e 6f 70 71 72 00
+    -->  m   n   o   p   q   r   (terminating byte)
+    --> 109 110 111 112 113 114 000
+    */
+    const char *m = "mnopqr";
+    const m_length = 7;
+    show_bytes((byte_pointer) m, m_length);
 }
 
 
