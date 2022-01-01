@@ -71,6 +71,27 @@ void print_array(int a[], int cnt) {
     printf("\n");
 }
 
+// Problem 2.12
+void show_least_significant_bytes(int n, int w) {
+    int least_significant_byte = 0x0;
+    for (int i = 0; i < w; ++i) {
+        least_significant_byte <<= 4;
+        least_significant_byte |= 0xFF;
+    }
+
+    int res = n & least_significant_byte;
+    printf("%x\n", res);
+}
+
+void show_complement_bytes_except_last_two(int n) {
+    int complement = n ^ 0xFFFFFF00;
+    printf("%x\n", complement);
+}
+
+void show_least_significant_byte_as_ones(int n) {
+    int res = n | 0x000000FF; // left of last two bytes remains unchanged
+    printf("%x\n", res);
+}
 void main() {
     /* Problem 2.5
 
@@ -122,6 +143,11 @@ void main() {
     print_array(nums, 5);
     reverse_array(nums, 5);
     print_array(nums, 5);
+
+    // Problem 2.12: Masking Operations
+    show_least_significant_bytes(0x87654321, 1); // Least significant byte
+    show_complement_bytes_except_last_two(0x87654321); // Complement of n except last two bytes
+    show_least_significant_byte_as_ones(0x87654321); // Least significant byte set to all ones and all other bytes left unchanged
 }
 
 
