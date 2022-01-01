@@ -95,8 +95,8 @@ void show_least_significant_byte_as_ones(int n) {
 
 // Problem 2.13
 /* Declarations of functions implementing operations bis and bic */
-// int bis(int x, int m); // setting z to 1 at each place m is 1
-// int bic(int x, int m); // setting z to 0 at each place m is 1
+// int bis(int x, int m); // setting z to 1 at each place m is 1 -> x | m
+// int bic(int x, int m); // setting z to 0 at each place m is 1 -> x & ~m
 
 // /* Compute x|y using only calls to functions bis and bic */
 // int bool_or(int x, int y) {
