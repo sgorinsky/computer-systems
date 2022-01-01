@@ -92,6 +92,24 @@ void show_least_significant_byte_as_ones(int n) {
     int res = n | 0x000000FF; // left of last two bytes remains unchanged
     printf("%x\n", res);
 }
+
+// Problem 2.13
+/* Declarations of functions implementing operations bis and bic */
+// int bis(int x, int m); // setting z to 1 at each place m is 1
+// int bic(int x, int m); // setting z to 0 at each place m is 1
+
+// /* Compute x|y using only calls to functions bis and bic */
+// int bool_or(int x, int y) {
+//     int result = bis(x, y);
+//     return result;
+// }
+
+// /* Compute x^y using only calls to functions bis and bic */
+// int bool_xor(int x, int y) {
+//     int result = bis(bic(x, y), bic(y, x));
+//     return result;
+// }
+
 void main() {
     /* Problem 2.5
 
