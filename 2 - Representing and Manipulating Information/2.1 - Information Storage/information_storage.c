@@ -133,7 +133,7 @@ void main() {
     2607352, 0x0027C8F8, 1001111100100011111000
     3510593.0, 0x4A1F23E0, 01001010000111110010001111100000
 
-    b. 29 matching bits
+    b. 18 matching bits
 
     c. beginning and end don't match
     */
@@ -144,7 +144,7 @@ void main() {
 
     Result of:
     const char *m = "mnopqr";
-    show_bytes((byte_pointer)m, strlen(m));
+    show_bytes((byte_pointer) m, strlen(m));
 
     strings are more platform independent:
     --> 6d 6e 6f 70 71 72 00
