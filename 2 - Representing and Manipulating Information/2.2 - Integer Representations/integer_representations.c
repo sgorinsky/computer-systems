@@ -113,8 +113,40 @@ When truncating unsigned integers, we simply find the number mod 2^3.
 For signed integers, we convert the number to an unsigned integer mod 2^k then we convert it to two's complement
 */
 
-int main()
-{
+// Problem 2.25
+// If length of unsigned is longer than length of a, we get a memory error
+int sum_elements(float a[]) {
+    int length = sizeof(a) - sizeof(a[0]) + 1; // *(&a + 1) - a; // ptr to next memory address of a *(&a + 1) - all memory bytes for array
+    float result = 0;
+    for (int i = 0; i < length; ++i)
+        result += a[i];
+
+    return result;
+}
+
+
+// Problem 2.26
+// a. Produces incorrect result when t length > s length
+// b. Comes about b/c size_t is unsigned so s length - t length is never < 0
+// c. Code fix below
+
+/* Prototype for library function strlen */
+size_t strlen(const char *s);
+
+/* Determine whether string s is longer than string t */
+/* WARNING: This function is buggy */
+int strlonger(char *s, char *t) {
+    // return strlen(s) - strlen(t) > 0; // buggy b/c size_t/strlen is an unsigned int and will never be < 0
+    return strlen(s) > strlen(t); // fixes bug
+}
+
+int main() {
     show_nonintuitive_expressions();
+    
+    float a[5] = {1.0, 2.0, 3.0, 4.0, 5.0};
+    printf("sum of elements: %d\n", sum_elements(a));
+
+    char* is_longer = strlonger("abcd", "abc") ? "true" : "false";
+    printf("abcd is longer than abc? %s\n", is_longer);
     return 0;
 }
