@@ -33,8 +33,8 @@ void show_bytes(byte_pointer start, size_t len) { // pointer to array of start b
     printf(" (little endian)\n");
 }
 
-// Practice Problem 2.21: Expressions with signed and unsigned
 void show_nonintuitive_expressions() {
+    // Practice Problem 2.21: Expressions with signed and unsigned
     // Type   Evaluation (1 is true, 0 is false)
     int first = -2147483647 - 1 == 2147483648U;  // unsigned 1
     printf("-2147483647 - 1 == 2147483648U is %x\n", first);
@@ -86,6 +86,22 @@ b. fun1 keeps everything unsigned until the end so sign extension isn't used sin
 which is why the significant bits are extended
 
 */
+
+/* Practice Problem 2.24: Truncation of 4 bits to 3 bits
+
+Hex                         Unsigned                    Two's Complement
+
+Original    Truncated       Original    Truncated       Original    Truncated
+1           1               1           1               1           1
+3           3               3           3               3           3
+5 (0101)    5 (5 mod 8)     5           5               5           -3
+C (1100)    4 (12 mod 8)    12          4               -4          -4
+E (1110)    6 (14 mod 8)    14          6               -2          -2
+
+When truncating unsigned integers, we simply find the number mod 2^3. 
+For signed integers, we convert the number to an unsigned integer mod 2^k then we convert it to two's complement
+*/
+
 int main()
 {
     show_nonintuitive_expressions();
