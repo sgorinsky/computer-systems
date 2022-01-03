@@ -55,6 +55,17 @@ void show_nonintuitive_expressions() {
     unsigned uy = sx;  // first converted to int then unsigned due to c conventions -> (unsigned) (int) sx (instead of (unsigned) (unsigned short))
     printf("uy = %u: ", uy);
     show_bytes((byte_pointer) &uy, sizeof(typeof(uy)));
+
+    // bit truncation
+    int16_t ix = 0x80FF; // 2^15 - 255 = 32513
+    int8_t x = ix; // 0xFF -> -1
+
+    printf("16 bits: %d, truncated to 8 bits: %d\n", ix, x);
+
+    int16_t iy = 0xFF1F; // -225
+    int8_t y = iy;       // 0x1F -> 31
+
+    printf("16 bits: %d, truncated to 8 bits: %d\n", iy, y);
 }
 
 /* Practice Problem 2.22: Sign extension for B2T
