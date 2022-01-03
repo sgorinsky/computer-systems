@@ -57,7 +57,37 @@ void show_nonintuitive_expressions() {
     show_bytes((byte_pointer) &uy, sizeof(typeof(uy)));
 }
 
-int main() {
+/* Practice Problem 2.22: Sign extension for B2T
+Formula for sign extension if everything from the left is ones is to take the rightmost from the contiguous ones and use that as the most significant bit
+100 = 4
+1100 = 4
+11100 = 4
+111100 = 4
+*/
+
+/* Practice Problem 2.23: bit shifts and extensions on 32-bit machine
+int fun1(unsigned word) {
+    return (int)((word << 24) >> 24);
+}
+int fun2(unsigned word) {
+    return ((int)word << 24) >> 24;
+}
+
+a. 
+
+Hex             fun1            fun2
+
+0x00000076      0x00000076      0x00000076 // 7 = 0111 --> when shifted, significant bits aren't extended
+0x87654321      0x00000021      0x00000021 // 2 = 0010
+0x000000C9      0x000000C9      0xFFFFFFC9 // C = 1100 --> significant bits are extended since sign is 1
+0xEDCBA987      0x00000087      0xFFFFFF87 // 8 = 1000
+
+b. fun1 keeps everything unsigned until the end so sign extension isn't used since it only works for B2T while fun2 casts word as an int before it's shifted
+which is why the significant bits are extended
+
+*/
+int main()
+{
     show_nonintuitive_expressions();
     return 0;
 }
