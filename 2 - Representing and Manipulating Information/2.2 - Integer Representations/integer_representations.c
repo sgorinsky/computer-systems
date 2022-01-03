@@ -25,7 +25,15 @@ x  T2U
 8   8
 */
 
-// Practice Problem 2.201: Expressions with signed and unsigned
+typedef unsigned char* byte_pointer;
+void show_bytes(byte_pointer start, size_t len) { // pointer to array of start bytes
+    for (int i = 0; i < len; i++) {
+        printf(" %.2x", start[i]); // displays 2 digit hex representation of address of ith index of bytes array
+    }
+    printf(" (little endian)\n");
+}
+
+// Practice Problem 2.21: Expressions with signed and unsigned
 void show_nonintuitive_expressions() {
     // Type   Evaluation (1 is true, 0 is false)
     int first = -2147483647 - 1 == 2147483648U;  // unsigned 1
@@ -42,6 +50,11 @@ void show_nonintuitive_expressions() {
 
     int fifth = -2147483647 - 1U < -2147483647; // unsigned 1
     printf("-2147483647 - 1U < -2147483647 is %x\n", fifth);
+
+    short sx = -12345; /* -12345 */
+    unsigned uy = sx;  // first converted to int then unsigned due to c conventions -> (unsigned) (int) sx (instead of (unsigned) (unsigned short))
+    printf("uy = %u: ", uy);
+    show_bytes((byte_pointer) &uy, sizeof(typeof(uy)));
 }
 
 int main() {
