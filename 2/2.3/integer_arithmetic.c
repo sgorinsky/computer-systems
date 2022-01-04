@@ -31,7 +31,26 @@ int buggy_tadd_ok(int x, int y) {
     // if x + y overflows in either direction, sum - x still == y b/c it overflows back to == y, same w sum - y == x
 }
 
-int main() {
+// Problem 2.32
+/* Determine whether arguments can be subtracted without overflow */
+/* WARNING: This code is buggy. */
+int tsub_ok(int x, int y) {
+    if ((x < 0 && y < 0) || (x > 0 && y > 0)) {
+        return 1;
+    }
+    if (y == 0xF0000000) {
+        if (x == 0xF0000000) {
+            return 0;
+        }
+
+        return tadd_ok(y, -x);
+    }
+
+    return tadd_ok(x, -y); // will fail if y is 0xF0000000 b/c that will positive overflow to negative 1 and throw results
+}
+
+int main()
+{
     printf("can we add %u + %u? %d\n", 0xFFFFFF00, 0xFF, uadd_ok(0xFFFFFF00, 0xFF));
     printf("can we add %u + %u? %d\n", 0xFFFFFF00, 0xFFF, uadd_ok(0xFFFFFF00, 0xFFF));
 
@@ -40,6 +59,9 @@ int main() {
 
     printf("can we add %d + %d? %d\n", 0x0FFFFFFF, 0x0FFFF0FF, buggy_tadd_ok(0x0FFFFFFF, 0x0FFFF0FF));
     printf("can we add %d + %d? %d\n", 0xF0000000, 0xF0000000, buggy_tadd_ok(0xF0000000, 0xF0000000));
+
+    printf("can we subtract %d - %d? %d\n", 0x0FFFFFFF, 0x0FFFF0FF, tsub_ok(0x0FFFFFFF, 0x0FFFF0FF));
+    printf("can we subtract %d - %d? %d\n", 0x0FFFF000, 0xF0000000, tsub_ok(0x0FFFF000, 0xF0000000));
 
     return 0;
 }
