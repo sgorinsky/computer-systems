@@ -49,6 +49,26 @@ int tsub_ok(int x, int y) {
     return tadd_ok(x, -y); // will fail if y is 0xF0000000 b/c that will positive overflow to negative 1 and throw results
 }
 
+// Problem 2.35
+/* Determine whether arguments can be multiplied without overflow */
+// a. x is 0 means that we can multiply
+//      x * y = p + t * 2^w b/c if p overflows, there is an additional term
+// b. p = x * y - t * 2^w, q = p / x --> p = qx - t * 2^w, r = -t * 2 ^ w
+// c. if r = t = 0, p = qx = yx from original formula
+
+// Problem 2.36: Devise tmult_ok w/o division
+int tmult_ok(int x, int y)
+{
+    // int p = x * y;
+    // /* Either x is zero, or dividing p by x gives y */
+    // return !x || p / x == y;
+
+    // w/o division
+    int64_t p = (int64_t) x * y;
+    return p == (int) p;
+}
+
+// 2.35
 int main()
 {
     printf("can we add %u + %u? %d\n", 0xFFFFFF00, 0xFF, uadd_ok(0xFFFFFF00, 0xFF));
@@ -62,6 +82,9 @@ int main()
 
     printf("can we subtract %d - %d? %d\n", 0x0FFFFFFF, 0x0FFFF0FF, tsub_ok(0x0FFFFFFF, 0x0FFFF0FF));
     printf("can we subtract %d - %d? %d\n", 0x0FFFF000, 0xF0000000, tsub_ok(0x0FFFF000, 0xF0000000));
+
+    printf("can we multiply %d * %d? %d\n", 0x0FFFFFFF, 0x0FFFF0FF, tmult_ok(0x0FFFFFFF, 0x0FFFF0FF));
+    printf("can we multiply %d * %d? %d\n", 0x0FFFF000, 0xF0000000, tmult_ok(0x0FFFF000, 0xF0000000));
 
     return 0;
 }
