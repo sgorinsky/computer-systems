@@ -71,6 +71,13 @@ int tmult_ok(int x, int y)
 // Problem 2.38: (a << k) + b
 // Multiples of 2 can be performed with a single LEA instruction
 
+// Problem 2.42: Divide by 16 w/o division, modulus, multiplication, conditionals, loops, or comparison operators
+int divide_by_16(int32_t x) {
+    // Recall: (x<0 ? x+(1<<k)-1 : x) >> k
+    int bias = (x >> 31) & 0xF;
+    return (x + bias) >> 4;
+}
+
 int main()
 {
     printf("can we add %u + %u? %d\n", 0xFFFFFF00, 0xFF, uadd_ok(0xFFFFFF00, 0xFF));
@@ -87,6 +94,9 @@ int main()
 
     printf("can we multiply %d * %d? %d\n", 0x0FFFFFFF, 0x0FFFF0FF, tmult_ok(0x0FFFFFFF, 0x0FFFF0FF));
     printf("can we multiply %d * %d? %d\n", 0x0FFFF000, 0xF0000000, tmult_ok(0x0FFFF000, 0xF0000000));
+
+    printf("divide %d by 16: %d\n", -31, divide_by_16(-31));
+    printf("divide %d by 16: %d\n", 0xF, divide_by_16(0xF));
 
     return 0;
 }
