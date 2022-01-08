@@ -68,7 +68,9 @@ int tmult_ok(int x, int y)
     return p == (int) p;
 }
 
-// 2.35
+// Problem 2.38: (a << k) + b
+// Multiples of 2 can be performed with a single LEA instruction
+
 int main()
 {
     printf("can we add %u + %u? %d\n", 0xFFFFFF00, 0xFF, uadd_ok(0xFFFFFF00, 0xFF));
