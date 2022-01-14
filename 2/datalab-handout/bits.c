@@ -164,9 +164,8 @@ int tmin(void) {
  *   Rating: 1
  */
 int isTmax(int x) {
-    unsigned y = tmin();
-    int z = y - 1;
-    return x == z;
+    int tmax = ~(0x1 << 31);
+    return !(x ^ tmax);
 }
 /* 
  * allOddBits - return 1 if all odd-numbered bits in word set to 1
@@ -179,7 +178,7 @@ int isTmax(int x) {
 int allOddBits(int x) {
   int odds = 0xAA;
   int check = (odds << 24) + (odds << 16) + (odds << 8) + odds;
-  return !((check & x) ^ check);
+  return !((x & check) ^ check);
 }
 /* 
  * negate - return -x 
