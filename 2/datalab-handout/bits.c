@@ -177,9 +177,9 @@ int isTmax(int x) {
  *   Rating: 2
  */
 int allOddBits(int x) {
-  int odds = 0x55;
+  int odds = 0xAA;
   int check = (odds << 24) + (odds << 16) + (odds << 8) + odds;
-  return check & x;
+  return !((check & x) ^ check);
 }
 /* 
  * negate - return -x 
