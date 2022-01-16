@@ -212,9 +212,10 @@ int isAsciiDigit(int x) {
  */
 int conditional(int x, int y, int z) {
     x = !!x;
+    int zeroes = 0x0;
     int ones = ~0x0;
     int left = y & ((ones + x) ^ ones);
-    int right = z & ((ones + x) ^ 0x0);
+    int right = z & ((ones + x) ^ zeroes);
     return left + right;
 }
 /* 
