@@ -164,7 +164,7 @@ int tmin(void) {
  *   Rating: 1
  */
 int isTmax(int x) {
-    int tmax = ~(0x1 << 31);
+    int tmax = ~(0x0 + ~0x0);
     return !(x ^ tmax);
 }
 /* 
@@ -201,7 +201,7 @@ int negate(int x) {
  *   Rating: 3
  */
 int isAsciiDigit(int x) {
-  return 2;
+  return 
 }
 /* 
  * conditional - same as x ? y : z 
@@ -238,7 +238,7 @@ int isLessOrEqual(int x, int y) {
  *   Rating: 4 
  */
 int logicalNeg(int x) {
-  return 2;
+    
 }
 /* howManyBits - return the minimum number of bits required to represent x in
  *             two's complement
