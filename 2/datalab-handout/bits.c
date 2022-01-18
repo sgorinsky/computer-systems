@@ -164,8 +164,8 @@ int tmin(void) {
  *   Rating: 1
  */
 int isTmax(int x) {
-    int cand_tmin = x + 1;
-    return !(cand_tmin ^ x ^ ~0x0);
+    int w = !(x + 1); // weight
+    return !(((x + w + 1) ^ ~0x0) ^ x);
 }
 /* 
  * allOddBits - return 1 if all odd-numbered bits in word set to 1
@@ -201,7 +201,10 @@ int negate(int x) {
  *   Rating: 3
  */
 int isAsciiDigit(int x) {
-  return 2;
+  int first = x & 0x30;
+  int second = x & 0xF;
+
+  return !(first ^ 0x30) & (second <= 0x9);
 }
 /* 
  * conditional - same as x ? y : z 
@@ -238,7 +241,7 @@ int isLessOrEqual(int x, int y) {
  *   Rating: 4 
  */
 int logicalNeg(int x) {
-    
+    return 2;
 }
 /* howManyBits - return the minimum number of bits required to represent x in
  *             two's complement
