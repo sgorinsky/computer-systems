@@ -201,10 +201,11 @@ int negate(int x) {
  *   Rating: 3
  */
 int isAsciiDigit(int x) {
-  int first = x & 0x30;
-  int second = x & 0xF;
+    int first = !((x >> 4) ^ 0x3);
+    int neg_two = ~0x0 + ~0x0;
+    int second = x & 0xF;
 
-  return !(first ^ 0x30) & (second <= 0x9);
+    return first & (!(second + neg_two & 0x8) | !(second ^ 0x0) | !(second ^ 0x1));
 }
 /* 
  * conditional - same as x ? y : z 
