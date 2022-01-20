@@ -232,9 +232,11 @@ int conditional(int x, int y, int z) {
 int isLessOrEqual(int x, int y) {
     int sx = (x >> 31) & 1;
     int sy = (y >> 31) & 1;
+
     int sum = x + (~y + 1);
     int sum_is_neg = sum >> 31 & 1;
-    return !(x ^ y) | (sx & !sy) | ((sx & sy) & sum_is_neg) | ((!sx & !sy) & sum_is_neg);
+
+    return !(!sx & sy) & (!(x ^ y) | (sx & !sy) | sum_is_neg);
 }
 //4
 /* 
@@ -245,7 +247,7 @@ int isLessOrEqual(int x, int y) {
  *   Max ops: 12
  *   Rating: 4 
  */
-int logicalNeg(int x) { // 0x80 00 00 00
+int logicalNeg(int x) { // 0x80 00 00 00 -> 0x80 00 80 00 -> 0x80 00 80 80 -> 0x80 00 80 88 -> 0x80 00 80 8A -> 0x80 00 80 8B  
     int a = x | (x >> 16);
     int b = a | (a >> 8);
     int c = b | (b >> 4);
