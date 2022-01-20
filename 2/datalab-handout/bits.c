@@ -202,10 +202,11 @@ int negate(int x) {
  */
 int isAsciiDigit(int x) {
     int first = !((x >> 4) ^ 0x3);
-    int neg_two = ~0x0 + ~0x0;
+    int neg_one = ~0x0;
+    int neg_two = neg_one + neg_one;
     int second = x & 0xF;
 
-    return first & (!(second + neg_two & 0x8) | !(second ^ 0x0) | !(second ^ 0x1));
+    return first & !((second + neg_two & 0x8) & (second ^ 0x0) & (second ^ 0x1));
 }
 /* 
  * conditional - same as x ? y : z 
