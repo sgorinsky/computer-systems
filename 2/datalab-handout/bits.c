@@ -233,8 +233,8 @@ int isLessOrEqual(int x, int y) {
     int sx = (x >> 31) & 1;
     int sy = (y >> 31) & 1;
     int sum = x + (~y + 1);
-
-    return !(x ^ y) | (sx & !sy) | ((sx & sy) & (sum >> 31 & 1)) | ((!sx & !sy) & (sum >> 31 & 1));
+    int sum_is_neg = sum >> 31 & 1;
+    return !(x ^ y) | (sx & !sy) | ((sx & sy) & sum_is_neg) | ((!sx & !sy) & sum_is_neg);
 }
 //4
 /* 
